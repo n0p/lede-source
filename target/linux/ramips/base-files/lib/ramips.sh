@@ -502,11 +502,20 @@ ramips_board_detect() {
 	*"TL-WR840N v4")
 		name="tl-wr840n-v4"
 		;;
+	*"TL-WR840N v5")
+		name="tl-wr840n-v5"
+		;;
 	*"TL-WR841N v13")
 		name="tl-wr841n-v13"
 		;;
 	*"U25AWF-H1")
 		name="u25awf-h1"
+		;;
+	*"U7621-06 (256M RAM/16M flash)")
+		name="u7621-06-256M-16M"
+		;;
+	*"U7628-01 (128M RAM/16M flash)")
+		name="u7628-01-128M-16M"
 		;;
 	*"UBNT-ERX")
 		name="ubnt-erx"
@@ -728,7 +737,9 @@ ramips_board_detect() {
 		name="youku-yk1"
 		;;
 	*)
-		name="generic"
+		name="$(strings /proc/device-tree/compatible | head -1)"
+		name="${name##*,}"
+		name="${name:-generic}"
 		;;
 	esac
 
